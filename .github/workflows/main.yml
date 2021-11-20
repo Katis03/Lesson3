@@ -1,0 +1,29 @@
+name: laba1
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - 
+      name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: cr.yandex/crpob95m2a644ar79lss
+        username: oauth
+        password: AQAAAAAqGJlpAATuwUfF3nio1Ux4ovgHYHI0GLI
+
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: laba1
+        registry: cr.yandex/crpob95m2a644ar79lss
